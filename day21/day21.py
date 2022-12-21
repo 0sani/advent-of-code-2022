@@ -1,4 +1,3 @@
-import math
 with open("input.txt", "r") as f:
     data = [line.strip() for line in f.readlines()]
     f.close()
@@ -61,14 +60,15 @@ def solve(a, b):
             if op == "+":
                 b -= eval(left)
             elif op == "-":
-                b += eval(left)
+                # x - h = b
+                # h = x - b
+                b = eval(left) - b
             elif op == "*":
                 b /= eval(left)
             else:
                 # x / h = b
                 # h = x / b
                 b = eval(left) / b
-                # b *= eval(left)
             a = right.strip()
     return b
 
@@ -136,10 +136,7 @@ def part_two(data):
         b, a = gen_paren_eq(monkeys[options[0]]), gen_paren_eq(monkeys[options[2]])
     b = int(eval(b))
 
-    if len(data) == 15:
-        return int(solve(a,b))
-    res = eval("(b*441 - 46651765625926624)/-7040")
-    return math.ceil(res)
+    return int(solve(a,b))
 
 
 
